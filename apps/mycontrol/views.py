@@ -15,7 +15,7 @@ from .forms import LoginForm
 
 
 class MainView(LoginRequiredMixin, TemplateView):
-
+    print settings.BASE_DIR
     template_name = 'index.html'
     login_url = "/login/"
 
@@ -44,13 +44,12 @@ class MainView(LoginRequiredMixin, TemplateView):
 class LoginView(FormView):
     form_class = LoginForm
     template_name = 'login.html'
+
     def form_valid(self, form):
-        #redirect_to = settings.LOGIN_REDIRECT_URL
         auth_login(self.request, form.get_user())
         if self.request.session.test_cookie_worked():
             self.request.session.delete_test_cookie()
         return redirect('/')
-
     def form_invalid(self, form):
         return self.render_to_response(self.get_context_data(form=form))
 
@@ -59,6 +58,19 @@ class LoginView(FormView):
         request.session.set_test_cookie()
         return super(LoginView, self).dispatch(request, *args, **kwargs)
 
+    # def get(self, request):
+    #     if not self.request.user.is_authenticated:
+    #         return super(LoginView, self).get(self, request)
+    #     else:
+    #         print self.request.user
+    #         return redirect("/")
+# class LogoutView(View):
+#     def get(self, request, *args, **kwargs):
+#         auth_logout(request)
+#         return redirect('/')
+def LogOut(request):
+	auth_logout(request)
+	return redirect('/')
 
 # from django.conf import settings
 # from django.contrib.auth.forms import AuthenticationForm
