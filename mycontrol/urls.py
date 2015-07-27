@@ -7,6 +7,7 @@ urlpatterns = patterns('',
     # url(r'^$', 'mycontrol.views.home', name='home'),
     # url(r'^blog/', include('blog.urls')),
     url(r'^', include('apps.mycontrol.urls', namespace="mycontrol_app")),
+    url(r'^', include('apps.users.urls', namespace="users_app")),
     url(r'^admin/', include(admin.site.urls)),
 )
 

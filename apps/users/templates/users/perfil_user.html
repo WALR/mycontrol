@@ -1,0 +1,83 @@
+{% extends "base.html" %}
+
+{% block title %} {{ block.super }} | Perfil{% endblock title %}
+
+{% block body %}
+    {% include "navbar.html" %}
+    <div class="container">
+
+        <div class="page-header">
+            <h4>
+                <a href="/" class="btn btn-success">
+                    <span class="glyphicon glyphicon-chevron-left"></span> Regresar
+                </a>
+            </h4>
+        </div>
+
+        <div class="row">
+
+            <div class="col-md-3 text-center">
+                {% if user.imagen %}
+                    <img src="{{imagen.url}}" alt="{{nombre}}" class="img-rounded" alt="" width="250">
+                {% else %}
+                    <img src="/media/default.png" alt="{{nombre}}" class="img-rounded" alt="" width="250">
+                {% endif %}
+            </div>
+
+            <div class="col-md-9">
+
+                <table class="table">
+                    <tbody>
+                        <tr>
+                            <th>Nombre</th>
+                            <td>{{user.first_name}}</td>
+                        </tr>
+                        <tr>
+                            <th>Apellido</th>
+                            <td>{{user.last_name}}</td>
+                        </tr>
+                        <tr>
+                            <th>Email</th>
+                            <td>{{user.email}}</td>
+                        </tr>
+                        <tr>
+                            <th>Marca</th>
+                            <td>{{marca}}</td>
+                        </tr>
+                        <tr>
+                            <th>Existencia</th>
+                            <td>{{existencia}}</td>
+                        </tr>
+                        <tr>
+                            <th>Precio Venta</th>
+                            <td>{{precioVenta}}</td>
+                        </tr>
+                        <tr>
+                            <th>Precio Compra</th>
+                            <td>{{precioCompra}}</td>
+                        </tr>
+                        <tr>
+                            <th>Precio por Mayor</th>
+                            <td>{{precioPorMayor}}</td>
+                        </tr>
+                        <tr>
+                            <th>Sucursal</th>
+                            <td>{{sucursal}}</td>
+                        </tr>
+                        <tr>
+                            <th>Proveedor</th>
+                            <td>{{proveedor}}</td>
+                        </tr>
+                        <tr>
+                            <th>Categoria</th>
+                            <td>{{categoria}}</td>
+                        </tr>
+                    </tbody>
+                </table>
+
+            </div>
+
+        </div>
+
+    </div>
+{% endblock %}

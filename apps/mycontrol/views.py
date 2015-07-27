@@ -15,7 +15,6 @@ from .forms import LoginForm
 
 
 class MainView(LoginRequiredMixin, TemplateView):
-    print settings.BASE_DIR
     template_name = 'index.html'
     login_url = "/login/"
 
@@ -53,10 +52,10 @@ class LoginView(FormView):
     def form_invalid(self, form):
         return self.render_to_response(self.get_context_data(form=form))
 
-    @method_decorator(sensitive_post_parameters('password'))
-    def dispatch(self, request, *args, **kwargs):
-        request.session.set_test_cookie()
-        return super(LoginView, self).dispatch(request, *args, **kwargs)
+    # @method_decorator(sensitive_post_parameters('password'))
+    # def dispatch(self, request, *args, **kwargs):
+    #     request.session.set_test_cookie()
+    #     return super(LoginView, self).dispatch(request, *args, **kwargs)
 
     # def get(self, request):
     #     if not self.request.user.is_authenticated:
