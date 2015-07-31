@@ -1,9 +1,11 @@
 from django.contrib.auth import login as auth_login, logout as auth_logout
-from django.contrib.auth.models import User
 from django.shortcuts import redirect
 from django.views.generic import TemplateView, CreateView, DetailView, UpdateView, DeleteView, FormView
 from braces.views import LoginRequiredMixin, GroupRequiredMixin
 from .forms import LoginForm
+
+from .models import User
+#from apps.users.models import User
 
 class LoginView(FormView):
     form_class = LoginForm
@@ -21,8 +23,14 @@ def LogOut(request):
 	auth_logout(request)
 	return redirect('/')
 
-class PerfilView(LoginRequiredMixin, DetailView):
+class PerfilView(LoginRequiredMixin, TemplateView):
     
     template_name = 'users/perfil_user.html'
-    model = User
     login_url = "/login/"
+    
+    def get_context_data(self, **kwargs):
+        context = super(PerfilView, self).get_context_data(**kwargs)
+        context['user'] = User.objects.get(pk = self.request.user.id)
+        
+        # context['cantidad_producto'] = context['producto'].count()
+        return context

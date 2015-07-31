@@ -29,7 +29,7 @@ class User(AbstractBaseUser, PermissionsMixin):
 	# codigo_empleado = models.PositiveIntegerField()
 	nombre = models.CharField(max_length=100)
 	apellido = models.CharField(max_length=100)
-	avatar = models.ImageField(upload_to = 'users')
+	avatar = models.ImageField(upload_to = 'users', blank=True, null=True)
 
 	objects = UserManager()
 
