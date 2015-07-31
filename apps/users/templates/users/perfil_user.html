@@ -34,7 +34,7 @@
                         </tr>
                         <tr>
                             <th>Nombre</th>
-                            <td>{{user.first_name}}</td>
+                            <td>{{user.nombre}}</td>
                         </tr>
                         <tr>
                             <th>Apellido</th>
@@ -45,40 +45,31 @@
                             <td>{{user.email}}</td>
                         </tr>
                         <tr>
-                            <th>Marca</th>
-                            <td>{{marca}}</td>
+                            <th>Estado</th>
+                            <td>
+                                {%if user.is_active %}
+                                <span class="label label-success">ACTIVO</span>
+                                {% else %}
+                                <span class="label label-danger">INACTIVO</span>
+                                {% endif %}
+                            </td>
                         </tr>
                         <tr>
-                            <th>Existencia</th>
-                            <td>{{existencia}}</td>
-                        </tr>
-                        <tr>
-                            <th>Precio Venta</th>
-                            <td>{{precioVenta}}</td>
-                        </tr>
-                        <tr>
-                            <th>Precio Compra</th>
-                            <td>{{precioCompra}}</td>
-                        </tr>
-                        <tr>
-                            <th>Precio por Mayor</th>
-                            <td>{{precioPorMayor}}</td>
-                        </tr>
-                        <tr>
-                            <th>Sucursal</th>
-                            <td>{{sucursal}}</td>
-                        </tr>
-                        <tr>
-                            <th>Proveedor</th>
-                            <td>{{proveedor}}</td>
-                        </tr>
-                        <tr>
-                            <th>Categoria</th>
-                            <td>{{categoria}}</td>
+                            <th>Permiso</th>
+                            <td>
+                                {%if user.is_staff %}
+                                <span class="label label-success">ADMINISTRADOR</span>
+                                {% else %}
+                                <span class="label label-danger">USUARIO</span>
+                                {% endif %}
+                            </td>
                         </tr>
                     </tbody>
                 </table>
-
+                
+                <a href="{% url 'users_app:ChangePass' user.id %}" class="btn btn-default" >
+                    Modificar Contraseña
+                </a>
             </div>
 
         </div>

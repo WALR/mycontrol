@@ -1,8 +1,9 @@
 from django.contrib.auth import login as auth_login, logout as auth_logout
 from django.shortcuts import redirect
+from django.core.urlresolvers import reverse_lazy, reverse
 from django.views.generic import TemplateView, CreateView, DetailView, UpdateView, DeleteView, FormView
 from braces.views import LoginRequiredMixin, GroupRequiredMixin
-from .forms import LoginForm
+from .forms import LoginForm, UserPassForm
 
 from .models import User
 #from apps.users.models import User
@@ -31,6 +32,21 @@ class PerfilView(LoginRequiredMixin, TemplateView):
     def get_context_data(self, **kwargs):
         context = super(PerfilView, self).get_context_data(**kwargs)
         context['user'] = User.objects.get(pk = self.request.user.id)
-        
-        # context['cantidad_producto'] = context['producto'].count()
         return context
+        
+
+class ChangePassView(LoginRequiredMixin, UpdateView):
+    
+    template_name = 'users/password_user.html'
+    success_url = reverse_lazy('user_app:perfil')
+    model = User
+    form_class = UserPassForm
+    login_url = "/login/"
+    
+    def get_context_data(self, **kwargs):
+        context = super(ChangePassView, self).get_context_data(**kwargs)
+        context['user'] = User.objects.get(pk = self.request.user.id)
+        return context
+
+
+    
