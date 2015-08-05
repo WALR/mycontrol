@@ -3,7 +3,7 @@ from django.shortcuts import redirect
 from django.core.urlresolvers import reverse_lazy, reverse
 from django.views.generic import TemplateView, CreateView, DetailView, UpdateView, DeleteView, FormView
 from braces.views import LoginRequiredMixin, GroupRequiredMixin
-from .forms import LoginForm, UserPassForm
+from .forms import LoginForm, UserEditForm
 
 from .models import User
 #from apps.users.models import User
@@ -25,28 +25,34 @@ def LogOut(request):
 	return redirect('/')
 
 class PerfilView(LoginRequiredMixin, TemplateView):
-    
+
     template_name = 'users/perfil_user.html'
     login_url = "/login/"
-    
+
     def get_context_data(self, **kwargs):
         context = super(PerfilView, self).get_context_data(**kwargs)
         context['user'] = User.objects.get(pk = self.request.user.id)
         return context
-        
 
-class ChangePassView(LoginRequiredMixin, UpdateView):
-    
-    template_name = 'users/password_user.html'
+
+class PerfilEditView(LoginRequiredMixin, FormView):
+
+    template_name = 'users/editperfil_user.html'
     success_url = reverse_lazy('user_app:perfil')
     model = User
-    form_class = UserPassForm
+    form_class = UserEditForm
     login_url = "/login/"
-    
+
     def get_context_data(self, **kwargs):
-        context = super(ChangePassView, self).get_context_data(**kwargs)
+        context = super(PerfilEditView, self).get_context_data(**kwargs)
         context['user'] = User.objects.get(pk = self.request.user.id)
         return context
 
-
-    
+    def get_initial(self):
+        data = {
+            'username' : self.request.user.username,
+            'nombre' : self.request.user.nombre,
+            'apellido' : self.request.user.apellido,
+            'email' : self.request.user.email,
+        }
+        return data

@@ -28,3 +28,13 @@ body {
 .navbar-default .navbar-nav>li> .active:hover{
 	background-color: #2D4967;
 }
+
+.panel-perfil {
+    border-color: #375A7F;
+}
+
+.panel-perfil>.panel-heading {
+    color: white;
+    background-color: #375A7F;
+    border-color: #375A7F;
+}

@@ -1,0 +1,156 @@
+{% extends "base.html" %}
+
+{% block title %} {{ block.super }} | Perfil{% endblock title %}
+
+{% block body %}
+    {% include "navbar.html" %}
+    <!--<div class="container">
+
+        <div class="page-header">
+            <h4>
+                <a href="{% url 'users_app:perfil' %}" class="btn btn-success">
+                    <span class="glyphicon glyphicon-chevron-left"></span> Regresar
+                </a>
+            </h4>
+        </div>
+
+        <div class="row">
+            <div class="col-md-12 well">
+                <form role="form" method="POST" enctype="multipart/form-data">
+                    {% csrf_token %}
+                    <strong>
+                        <p class="text-center lead">
+                        <span class="glyphicon glyphicon-info-sign"></span> Datos a Modificar
+                        </p>
+                    </strong>
+                    {% if form.errors %}
+                    <div class="alert alert-danger" role="alert">
+                        {{ form.errors }}
+                    </div>
+                    {% endif %}
+
+                    <div class="col-md-6 form-group">
+                        <label class="label-control">{{ form.username.label_tag }}</label>
+                        {{ form.username }}
+                    </div>
+                    <div class="col-md-6">
+                        <div class="col-md-7 form-group">
+                            <label class="label-control">{{ form.avatar.label_tag }}</label>
+                            {{ form.avatar }}
+                        </div>
+                    <div class="col-md-5" style="margin-top:-4em;">
+                        {% if user.avatar %}
+                        <img src="{{user.avatar.url}}" alt="{{user.username}}" class="img-thumbnail" width="200" style="height:120px !important;">
+                        {% else %}
+                        <img src="/media/default.png" alt="{{user.username}}" class="img-thumbnail" width="200" style="height:120px !important;">
+                        {% endif %}
+                    </div>
+                    </div>
+                    <div class="col-md-12 form-group">
+                        <label class="label-control">{{ form.email.label_tag }}</label>
+                        {{ form.email }}
+                    </div>
+                    <div class="col-md-12 form-group">
+                        <label class="label-control">{{ form.nombre.label_tag }}</label>
+                        {{ form.nombre }}
+                    </div>
+                    <div class="col-md-12 form-group">
+                        <label class="label-control">{{ form.apellido.label_tag }}</label>
+                        {{ form.apellido }}
+                    </div>
+                    <div class="col-md-12 form-group">
+                        <label class="label-control">{{ form.password.label_tag }}</label>
+                        {{ form.password }}
+                    </div>
+                    <div class="col-md-12 col-md-offset-5 form-group">
+                        <button type="submit" class="btn btn-lg btn-primary">Editar</button>
+                    </div>
+                </form>
+                </div>
+        </div>
+
+    </div>-->
+
+
+
+
+    <div class="container well">
+        <h1>Editar Perfil</h1>
+      	<hr>
+    	<div class="row">
+        <form class="form-horizontal" role="form" method="POST" enctype="multipart/form-data">
+          {% csrf_token %}
+          <!-- left column -->
+          <div class="col-md-3">
+            <div class="text-center">
+              {% if user.avatar %}
+                  <img src="{{MEDIA_URL}}{{user.avatar}}" class="img-thumbnail img-responsive" alt="avatar" width="300">
+                  <h6>Sube una foto diferente...</h6>
+                  {{ form.avatar }}
+              {% else %}
+                  <img src="{{MEDIA_URL}}default.png" class="img-thumbnail img-responsive" alt="avatar" width="300">
+                  <h6>Sube una foto diferente...</h6>
+                  {{ form.avatar }}
+              {% endif %}
+            </div>
+          </div>
+          <!-- edit form column -->
+          <div class="col-md-9 personal-info">
+            <!--<div class="alert alert-info alert-dismissable">
+              <a class="panel-close close" data-dismiss="alert">×</a>
+              <i class="fa fa-coffee"></i>
+              This is an <strong>.alert</strong>. Use this to show important messages to the user.
+            </div>-->
+            <h3>Informacion Personal</h3>
+              <div class="form-group">
+                <label class="col-lg-3 control-label">{{ form.username.label_tag }}</label>
+                <div class="col-lg-8">
+                  {{ form.username }}
+                </div>
+              </div>
+              <div class="form-group">
+                <label class="col-lg-3 control-label">{{ form.nombre.label_tag }}</label>
+                <div class="col-lg-8">
+                  {{ form.nombre }}
+                </div>
+              </div>
+              <div class="form-group">
+                <label class="col-lg-3 control-label">{{ form.apellido.label_tag }}</label>
+                <div class="col-lg-8">
+                  {{ form.apellido }}
+                </div>
+              </div>
+              <div class="form-group">
+                <label class="col-lg-3 control-label">{{ form.email.label_tag }}</label>
+                <div class="col-lg-8">
+                  {{ form.email }}
+                </div>
+              </div>
+              <div class="form-group">
+                <label class="col-md-3 control-label">Contraseña:</label>
+                <div class="col-md-8">
+                  {{ form.password }}
+                </div>
+              </div>
+              <div class="form-group">
+                <label class="col-md-3 control-label">Confirm Contraseña:</label>
+                <div class="col-md-8">
+                  {{ form.password }}
+                </div>
+              </div>
+              <div class="form-group">
+                <label class="col-md-3 control-label"></label>
+                <div class="col-md-8">
+                  <input type="submit" class="btn btn-primary" value="Guardar Cambios">
+                  <span></span>
+                  <input type="reset" class="btn btn-default" value="Cancelar">
+                </div>
+              </div>
+            </form>
+          </div>
+      </div>
+    </div>
+    <hr>
+
+
+{% endblock %}

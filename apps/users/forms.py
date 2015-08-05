@@ -20,12 +20,12 @@ class LoginForm(AuthenticationForm):
                             }))
 
 
-class UserPassForm(forms.ModelForm):
-    
+class UserEditForm(forms.ModelForm):
+
     class Meta:
         model = User
         #exclude = ('email',)
-        
+
         widgets = {
             'email' : forms.TextInput(attrs={'class' : 'form-control', 'readonly':'readonly'}),
             'username' : forms.TextInput(attrs={'class' : 'form-control'}),
@@ -34,7 +34,7 @@ class UserPassForm(forms.ModelForm):
             'avatar' : forms.FileInput(attrs={'class' : 'form-control'}),
             'password' : forms.PasswordInput(attrs={'class' : 'form-control'}),
         }
-        
+
 
 
 

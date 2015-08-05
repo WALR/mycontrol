@@ -51,9 +51,9 @@
 		            	<a class="dropdown-toggle" data-toggle="dropdown" href="#" id="download">
                     <span style="padding-right:0.5em;">
                       {% if user.avatar %}
-                        <img src="" alt="" width="60" height="50" style="margin-left:-1em;margin-top: -1.9em;margin-bottom: -1.8em;">
+                        <img src="{{MEDIA_URL}}{{user.avatar}}" alt="avatar" width="60" height="50" style="margin-left:-1em;margin-top: -1.9em;margin-bottom: -1.8em;">
                       {% else %}
-                        <img src="/media/default.png" alt="" width="60" height="50" style="margin-left:-1em;margin-top: -1.9em;margin-bottom: -1.8em;">
+                        <img src="{{MEDIA_URL}}default.png" alt="avatar" width="60" height="50" style="margin-left:-1em;margin-top: -1.9em;margin-bottom: -1.8em;">
                       {% endif %}
                     </span>
 		            		{# <span class="pull-left glyphicon glyphicon-user" aria-hidden="true" style="font-size:18px;padding-right:0.5em;"></span>#}
